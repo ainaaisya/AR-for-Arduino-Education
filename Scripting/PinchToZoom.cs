@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PinchToZoom : MonoBehaviour
 {
-    public float zoomSpeed = 0.5f;
+    public float zoomSpeed = 0.1f;
     public float minZoom = 1f;
     public float maxZoom = 5f;
 
