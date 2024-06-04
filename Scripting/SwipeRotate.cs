@@ -17,16 +17,12 @@ public class SwipeRotate : MonoBehaviour
 			
 			if(touch.phase == TouchPhase.Moved)
 			{
-				rotationY = Quaternion.Euler(
-					0f,
-					- touch.deltaPosition.x * rotateSpeedModifier,
-					0f);
+				rotationY = Quaternion.Euler(0f, - touch.deltaPosition.x * rotateSpeedModifier, 0f);
 					
 				transform.rotation = rotationY * transform.rotation;
 			}
 		}
 		
-		/*
 		if (touch.phase == TouchPhase.Moved)
             {
                 float rotationX = touch.deltaPosition.x * rotateSpeedModifier;
@@ -34,9 +30,9 @@ public class SwipeRotate : MonoBehaviour
                 
                 // Rotate the object around the Y axis based on horizontal swipe
                 transform.Rotate(Vector3.up, -rotationX, Space.World);
+				
                 // Rotate the object around the X axis based on vertical swipe
                 transform.Rotate(Vector3.right, rotationY, Space.World);
             }
-		*/
 	}
 }
