@@ -4,22 +4,26 @@ public class ZoomRotateOrbit : MonoBehaviour
 {
     [Header("Zoom Settings")]
     public float zoomSpeed = 0.1f;
-    public float minZoom = 0.2f;
-    public float maxZoom = 5f;
+    public float minFOV = 15f;
+    public float maxFOV = 90f;
+    /*public float minZoom = 0.2f;
+    public float maxZoom = 5f;*/
 
     [Header("Rotation Settings")]
     public float rotateSpeedModifier = 0.1f;
 
     private float initialDistance;
-    private Vector3 initialScale;
-    private Vector3 lastScale;
-    private Vector2 lastTouchPosition;
-    private Transform cameraTransform;
+	private Camera arCamera;
+    //private Vector3 initialScale;
+   // private Vector3 lastScale;
+   // private Vector2 lastTouchPosition;
+    //private Transform cameraTransform;
 
     void Start()
     {
-        cameraTransform = Camera.main.transform;
-        lastScale = cameraTransform.localScale;
+        /*cameraTransform = Camera.main.transform;
+        lastScale = cameraTransform.localScale;*/
+		arCamera = Camera.main;
     }
 
     void Update()
@@ -42,7 +46,7 @@ public class ZoomRotateOrbit : MonoBehaviour
         if (touchZero.phase == TouchPhase.Began || touchOne.phase == TouchPhase.Began)
         {
             initialDistance = Vector2.Distance(touchZero.position, touchOne.position);
-            initialScale = cameraTransform.localScale;
+           // initialScale = cameraTransform.localScale;
         }
         else if (touchZero.phase == TouchPhase.Moved || touchOne.phase == TouchPhase.Moved)
         {
@@ -54,14 +58,19 @@ public class ZoomRotateOrbit : MonoBehaviour
             }
 
             float factor = currentDistance / initialDistance;
+			
+			float newFOV = arCamera.fieldOfView / factor;
+            newFOV = Mathf.Clamp(newFOV, minFOV, maxFOV);
 
-            Vector3 newScale = initialScale * factor;
+            arCamera.fieldOfView = newFOV;
+
+           /* Vector3 newScale = initialScale * factor;
             newScale.x = Mathf.Clamp(newScale.x, minZoom, maxZoom);
             newScale.y = Mathf.Clamp(newScale.y, minZoom, maxZoom);
             newScale.z = Mathf.Clamp(newScale.z, minZoom, maxZoom);
 
             cameraTransform.localScale = newScale;
-            lastScale = newScale;
+            lastScale = newScale;*/
         }
     }
 
