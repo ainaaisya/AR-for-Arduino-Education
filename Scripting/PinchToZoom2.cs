@@ -12,7 +12,8 @@ public class PinchToZoom2 : MonoBehaviour
 
     void Start()
     {
-        lastScale = transform.localScale;
+        initialScale = transform.localScale; // Store initial scale
+        lastScale = initialScale;
     }
 
     void Update()
@@ -25,7 +26,6 @@ public class PinchToZoom2 : MonoBehaviour
             if (touchZero.phase == TouchPhase.Began || touchOne.phase == TouchPhase.Began)
             {
                 initialDistance = Vector2.Distance(touchZero.position, touchOne.position);
-                initialScale = transform.localScale;
             }
             else if (touchZero.phase == TouchPhase.Moved || touchOne.phase == TouchPhase.Moved)
             {
@@ -38,19 +38,13 @@ public class PinchToZoom2 : MonoBehaviour
 
                 float factor = currentDistance / initialDistance;
 
-                Vector3 newScale = initialScale * factor;
-                newScale.x = Mathf.Clamp(newScale.x, minZoom, maxZoom);
-                newScale.y = Mathf.Clamp(newScale.y, minZoom, maxZoom);
-                newScale.z = Mathf.Clamp(newScale.z, minZoom, maxZoom);
+                // Calculate new scale uniformly
+                float newScaleFactor = Mathf.Clamp(lastScale.x * factor, minZoom, maxZoom);
+                Vector3 newScale = new Vector3(newScaleFactor, newScaleFactor, newScaleFactor);
 
                 transform.localScale = newScale;
                 lastScale = newScale;
             }
-        }
-        else
-        {
-            // Ensure the scale is maintained when touches are lifted
-            transform.localScale = lastScale;
         }
     }
 }
