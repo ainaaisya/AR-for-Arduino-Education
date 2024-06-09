@@ -4,7 +4,7 @@ public class PinchToZoom2 : MonoBehaviour
 {
     public float zoomSpeed = 0.1f;
     public float minZoom = 0.2f;
-    public float maxZoom = 5f;
+    public float maxZoom = 4f;
 
     private float initialDistance;
     private Vector3 initialScale;
