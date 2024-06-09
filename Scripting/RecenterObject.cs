@@ -2,28 +2,30 @@ using UnityEngine;
 
 public class RecenterObject : MonoBehaviour
 {
-	public Camera mainCamera;
-	
-	void Start()
-	{
-		if(mainCamera == null)
-		{
-			mainCamera = Camera.main;
-		}
-	}
-	
-	void Update()
-	{
-		RecenterToScreen();
-	}
-	
-	private void RecenterToScreen()
-	{
-		if(mainCamera != null)
-		{
-			Vector3 screenCenter = new Vector3(Screen.width/2, Screen.height/2, mainCamera.nearClipPlane);
-			Vector3 worldCenter = mainCamera.ScreenToWorldPoint(screenCenter);
-			transform.position = new Vector3(worldCenter.x, worldCenter.y, transform.position.z);
-		}
-	}
+    public Camera mainCamera; // Reference to the main camera
+    public float offset = 7.0f; // Small offset to prevent overlap with the camera
+
+
+    void Start()
+    {
+        // Automatically assign the main camera if not set
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+        }
+    }
+
+    void Update()
+    {
+        // Check if the mainCamera is assigned
+        if (mainCamera != null)
+        {
+            // Calculate the position in front of the camera
+            Vector3 newPosition = mainCamera.transform.position + mainCamera.transform.forward * offset;
+
+            // Set the position of the model
+            transform.position = newPosition;
+
+        }
+    }
 }
