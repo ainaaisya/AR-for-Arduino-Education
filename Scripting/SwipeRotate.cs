@@ -1,5 +1,4 @@
 using UnityEngine;
-//From Youtube tutorial. Rotate with finger swipe
 
 public class SwipeRotate : MonoBehaviour
 {
@@ -21,12 +20,11 @@ public class SwipeRotate : MonoBehaviour
         {
             Vector2 deltaPosition = touch.deltaPosition * rotateSpeedModifier;
 
-            // Rotate the orbit (empty GameObject) around the Y axis based on horizontal swipe
+            // Rotate the object around the Y axis based on horizontal swipe
             transform.Rotate(Vector3.up, -deltaPosition.x, Space.World);
 
-            // Rotate the orbit around the local X axis based on vertical swipe
+            // Rotate the object around the X axis based on vertical swipe
             transform.Rotate(Vector3.right, deltaPosition.y, Space.Self);
         }
     }
 }
-

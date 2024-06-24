@@ -7,26 +7,51 @@ public class LabelManager : MonoBehaviour
     private Button showLabelsButton;
 
     [SerializeField]
-    private PlacementObject[] placementObjects;
+    private Button hideLabelsButton;
 
-    private bool labelsVisible = false;
+    [SerializeField]
+    private PlacementObject[] placementObjects;
 
     void Start()
     {
         if (showLabelsButton != null)
         {
-            showLabelsButton.onClick.AddListener(ToggleLabels);
+            showLabelsButton.onClick.AddListener(ShowLabels);
+        }
+
+        if (hideLabelsButton != null)
+        {
+            hideLabelsButton.onClick.AddListener(HideLabels);
+            hideLabelsButton.gameObject.SetActive(false); // Hide the Hide button initially
         }
     }
 
-    void ToggleLabels()
+    void ShowLabels()
     {
-        labelsVisible = !labelsVisible;
+        Debug.Log("ShowLabels button clicked.");
+		
+        ToggleLabels(true);
+        showLabelsButton.gameObject.SetActive(false);
+        hideLabelsButton.gameObject.SetActive(true);
+    }
 
+    void HideLabels()
+    {
+        Debug.Log("HideLabels button clicked.");
+		
+        ToggleLabels(false);
+        showLabelsButton.gameObject.SetActive(true);
+        hideLabelsButton.gameObject.SetActive(false);
+    }
+
+    void ToggleLabels(bool state)
+    {
+        Debug.Log($"ToggleLabels called with state: {state}");
+		
         foreach (var obj in placementObjects)
         {
-            obj.ToggleOverlay(labelsVisible);
-            obj.ToggleCanvas(labelsVisible);
+            obj.ToggleOverlay(state);
+            obj.ToggleCanvas(state);
         }
     }
 }

@@ -7,11 +7,8 @@ public class PlacementObject : MonoBehaviour
     private bool isSelected;
 
     [SerializeField]
-    private bool isLocked;
-
-    [SerializeField]
     private TextMeshPro overlayText;
-
+	
     [SerializeField]
     private Canvas canvasComponent;
 
@@ -22,12 +19,6 @@ public class PlacementObject : MonoBehaviour
     { 
         get => isSelected;
         set => isSelected = value;
-    }
-
-    public bool Locked 
-    { 
-        get => isLocked;
-        set => isLocked = value;
     }
 
     public void SetOverlayText(string text)
@@ -50,6 +41,8 @@ public class PlacementObject : MonoBehaviour
 
     public void ToggleOverlay(bool state)
     {
+        Debug.Log($"ToggleOverlay called with state: {state}");
+		
         if (overlayText != null)
         {
             overlayText.gameObject.SetActive(state);
@@ -59,9 +52,12 @@ public class PlacementObject : MonoBehaviour
 
     public void ToggleCanvas(bool state)
     {
+        Debug.Log($"ToggleCanvas called with state: {state}");
+        
         if (canvasComponent != null)
         {
             canvasComponent.gameObject.SetActive(state);
         }
     }
+
 }

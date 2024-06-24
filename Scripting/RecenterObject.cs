@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class RecenterObject : MonoBehaviour
 {
-    public Camera mainCamera;
+    public Camera mainCamera; // Reference to the main camera
     public float offset = 7.0f; // Small offset to prevent overlap with the camera
 
 
