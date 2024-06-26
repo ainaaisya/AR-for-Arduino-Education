@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlacementObject : MonoBehaviour
 {
@@ -8,6 +9,12 @@ public class PlacementObject : MonoBehaviour
 
     [SerializeField]
     private TextMeshPro overlayText;
+	
+	[SerializeField]
+    private TextMeshProUGUI descriptionText;
+	
+    [SerializeField]
+    private Image descriptionBox;
 	
     [SerializeField]
     private Canvas canvasComponent;
@@ -28,14 +35,33 @@ public class PlacementObject : MonoBehaviour
             overlayText.gameObject.SetActive(true);
             overlayText.text = text;
         }
+
+        if (descriptionText != null)
+        {
+            descriptionText.gameObject.SetActive(true);
+            descriptionText.text = text;
+        }
     }
 
     void Awake ()
     {
         overlayText = GetComponentInChildren<TextMeshPro>();
+        descriptionText = GetComponentInChildren<TextMeshProUGUI>();
+        descriptionBox = GetComponentInChildren<Image>();
+		
         if (overlayText != null)
         {
             overlayText.gameObject.SetActive(false);
+        }
+
+        if (descriptionText != null)
+        {
+            descriptionText.gameObject.SetActive(false);
+        }
+
+        if (descriptionBox != null)
+        {
+            descriptionBox.gameObject.SetActive(false);
         }
     }
 
@@ -47,6 +73,18 @@ public class PlacementObject : MonoBehaviour
         {
             overlayText.gameObject.SetActive(state);
             overlayText.text = overlayDisplayText;
+        }
+		
+
+        if (descriptionText != null)
+        {
+            descriptionText.gameObject.SetActive(state);
+            descriptionText.text = overlayDisplayText;
+        }
+
+        if (descriptionBox != null)
+        {
+            descriptionBox.gameObject.SetActive(state);
         }
     }
 
