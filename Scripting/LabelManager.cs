@@ -24,6 +24,9 @@ public class LabelManager : MonoBehaviour
             hideLabelsButton.onClick.AddListener(HideLabels);
             hideLabelsButton.gameObject.SetActive(false); // Hide the Hide button initially
         }
+		
+		// Ensure blue labels are shown initially
+        ShowLabels();
     }
 
     void ShowLabels()

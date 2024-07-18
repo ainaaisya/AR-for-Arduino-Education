@@ -5,8 +5,8 @@ public class DescriptionManager : MonoBehaviour
 {
     [SerializeField]
     private Button showDescriptionButton;
-	
-	[SerializeField]
+    
+    [SerializeField]
     private Button hideDescriptionButton;
 
     [SerializeField]
@@ -29,8 +29,8 @@ public class DescriptionManager : MonoBehaviour
     void ShowDesc()
     {
         Debug.Log("ShowDesc button clicked.");
-		
-        ToggleLabels(true);
+        
+        ToggleDescription(true);
         showDescriptionButton.gameObject.SetActive(false);
         hideDescriptionButton.gameObject.SetActive(true);
     }
@@ -38,23 +38,20 @@ public class DescriptionManager : MonoBehaviour
     void HideDesc()
     {
         Debug.Log("HideDesc button clicked.");
-		
-        ToggleLabels(false);
+        
+        ToggleDescription(false);
         showDescriptionButton.gameObject.SetActive(true);
         hideDescriptionButton.gameObject.SetActive(false);
     }
 
-    void ToggleLabels(bool state)
+    void ToggleDescription(bool state)
     {
-        Debug.Log($"ToggleLabels called with state: {state}");
-		
+        Debug.Log($"ToggleDescription called with state: {state}");
+        
         foreach (var obj in placementObjects)
         {
             obj.ToggleOverlay(state);
             obj.ToggleCanvas(state);
         }
     }
-	
-	
-	
 }
