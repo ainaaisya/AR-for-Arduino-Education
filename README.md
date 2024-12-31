@@ -20,7 +20,6 @@ The repository is organized as follows:
 - **Model**: Stores 3D models used in the application.
 - **Scenes**: Holds Unity scene files for the AR application.
 - **Scripting**: Contains Unity C# scripts that control the application’s behavior.
-- **testing.txt**: A sample text file for testing purposes.
 
 ## Installation and Usage
 
